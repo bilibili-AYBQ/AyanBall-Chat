@@ -1,0 +1,9 @@
+node_modules
+dist
+server/data.json
+server/uploads
+src-tauri/target
+src-tauri/gen
+*.log
+.DS_Store
+.test-blobs

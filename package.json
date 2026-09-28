@@ -1,0 +1,36 @@
+{
+  "name": "ayanball-chat",
+  "private": true,
+  "version": "1.0.0",
+  "description": "AyanBall Chat - 专业桌面聊天客户端 (Tauri 2 + React 19 + TS + Vite + Tailwind + Zustand)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "server": "node server/server.js"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.2.0",
+    "@tauri-apps/api": "^2.4.0",
+    "@tauri-apps/plugin-notification": "^2.2.0",
+    "pusher": "^5.2.0",
+    "pusher-js": "^8.4.0",
+    "puppeteer-core": "^25.12.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "@tauri-apps/cli": "^2.5.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.5.0",
+    "tailwindcss": "^4.1.4",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.3"
+  }
+}

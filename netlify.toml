@@ -1,0 +1,16 @@
+# ================= AyanBall Chat · Netlify 配置 =================
+# 动态服务端：netlify/functions（业务 API + Ably 令牌 + 文件直传）
+# 客户端静态站点：Vite 构建产物 dist
+[build]
+  command = "npm install && npm run build"
+  publish = "dist"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# 前端路由回退（单页应用）
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

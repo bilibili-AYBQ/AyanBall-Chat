@@ -1,0 +1,224 @@
+@import "tailwindcss";
+
+/* ================================================================
+   AyanBall Chat 设计系统
+   - 深色主题（默认）：深色商务 IM 风
+   - 浅色主题：参考 XIGUA Security 10x 的 Apple 风浅色设计语言
+     （白侧边栏 / #f0f2f5 窗口底 / 圆角卡片 / 柔和阴影）
+   ================================================================ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-app: #0f1420;
+  --bg-sidebar: #10151f;
+  --bg-panel: #121724;
+  --bg-panel2: #141b28;
+  --bg-input: #1a2130;
+  --bg-hover: rgba(255, 255, 255, 0.04);
+  --bg-hover2: rgba(255, 255, 255, 0.08);
+  --bg-active: rgba(59, 130, 246, 0.12);
+  --bg-bubble: #1c2435;
+  --bg-overlay: rgba(21, 27, 40, 0.96);
+  --bg-toast: rgba(27, 35, 51, 0.95);
+  --border: rgba(255, 255, 255, 0.06);
+  --border2: rgba(255, 255, 255, 0.08);
+  --input-border: rgba(255, 255, 255, 0.08);
+  --text-1: #e7ecf5;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --muted: #5c6675;
+  --accent: #3b82f6;
+  --accent2: #2f6df6;
+  --accent-soft: rgba(59, 130, 246, 0.12);
+  --danger-soft: rgba(239, 68, 68, 0.12);
+  --amber-soft: rgba(245, 158, 11, 0.1);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-app: #eef1f6;
+  --bg-sidebar: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-panel2: #ffffff;
+  --bg-input: #f2f3f7;
+  --bg-hover: rgba(0, 0, 0, 0.04);
+  --bg-hover2: rgba(0, 0, 0, 0.07);
+  --bg-active: rgba(0, 122, 255, 0.08);
+  --bg-bubble: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.98);
+  --bg-toast: rgba(255, 255, 255, 0.97);
+  --border: #e3e6ec;
+  --border2: #eef0f4;
+  --input-border: #e3e6ec;
+  --text-1: #17181c;
+  --text-2: #5b6472;
+  --text-3: #8a92a3;
+  --muted: #a6adba;
+  --accent: #2f7df6;
+  --accent2: #1f5ff0;
+  --accent-soft: rgba(47, 125, 246, 0.12);
+  --danger-soft: rgba(255, 59, 48, 0.1);
+  --amber-soft: rgba(255, 149, 0, 0.14);
+  --shadow: 0 4px 18px rgba(20, 30, 60, 0.08);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI Variable", "Segoe UI", "PingFang SC", "HarmonyOS Sans SC",
+    "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  background: var(--bg-app);
+  color: var(--text-1);
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 语义化工具类（跟随主题变量） ---------- */
+.bg-app { background-color: var(--bg-app); }
+.bg-sidebar { background-color: var(--bg-sidebar); }
+.bg-panel { background-color: var(--bg-panel); }
+.bg-panel2 { background-color: var(--bg-panel2); }
+.bg-input { background-color: var(--bg-input); }
+.bg-bubble { background-color: var(--bg-bubble); }
+.bg-overlay { background-color: var(--bg-overlay); }
+.bg-toast { background-color: var(--bg-toast); }
+.bg-soft { background-color: var(--bg-hover); }
+.bg-soft2 { background-color: var(--bg-hover2); }
+.border-soft2 { border-color: var(--border2); }
+.hover-bg-soft:hover { background-color: var(--bg-hover); }
+.bd { border-color: var(--border); }
+.bd2 { border-color: var(--border2); }
+.text-1 { color: var(--text-1); }
+.text-2 { color: var(--text-2); }
+.text-3 { color: var(--text-3); }
+.muted { color: var(--muted); }
+.acc { color: var(--accent); }
+.hv:hover { background-color: var(--bg-hover); }
+.hv2:hover { background-color: var(--bg-hover2); }
+.sh { box-shadow: var(--shadow); }
+
+/* ---------- 滚动条 ---------- */
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border2);
+  border-radius: 4px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 动画 ---------- */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.94) translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes toastIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.45); }
+  70% { box-shadow: 0 0 0 14px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+@keyframes spinner { to { transform: rotate(360deg); } }
+
+.anim-fade { animation: fadeIn 0.18s ease both; }
+.anim-pop { animation: popIn 0.22s cubic-bezier(0.2, 1.1, 0.4, 1) both; }
+.anim-toast { animation: toastIn 0.28s cubic-bezier(0.2, 1, 0.3, 1) both; }
+.anim-slide { animation: slideUp 0.22s ease both; }
+.anim-ring { animation: pulseRing 1.6s ease-out infinite; }
+
+.spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid var(--border2);
+  border-top-color: var(--accent);
+  animation: spinner 0.7s linear infinite;
+}
+
+/* ---------- 通用控件 ---------- */
+.input-dark {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--input-border);
+  border-radius: 10px;
+  color: var(--text-1);
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input-dark:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.input-dark::placeholder {
+  color: var(--muted);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 600;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.btn-accent:hover { filter: brightness(1.12); }
+.btn-accent:active { transform: scale(0.98); }
+.btn-accent:disabled { opacity: 0.5; pointer-events: none; }
+
+.btn-ghost {
+  background: var(--bg-hover);
+  border: 1px solid var(--border2);
+  color: var(--text-2);
+  border-radius: 10px;
+  padding: 9px 16px;
+  transition: background 0.15s ease;
+}
+.btn-ghost:hover { background: var(--bg-hover2); }
+
+.btn-danger {
+  background: var(--danger-soft);
+  color: #f87171;
+  border-radius: 10px;
+  padding: 9px 16px;
+  transition: background 0.15s ease;
+}
+.btn-danger:hover { background: rgba(239, 68, 68, 0.22); }
+
+/* ---------- 聊天壁纸（QQ 风格） ---------- */
+.wp-default { background: var(--bg-app); }
+.wp-aurora {
+  background: linear-gradient(140deg, #101432 0%, #1d1b4b 30%, #3b2a7a 62%, #0f766e 100%);
+}
+.wp-ocean {
+  background: linear-gradient(140deg, #0b3a5e 0%, #0f5d7a 45%, #145e5e 100%);
+}
+.wp-sunset {
+  background: linear-gradient(140deg, #6d1d2e 0%, #a13a20 45%, #5b1e63 85%, #2d1456 100%);
+}
+.wp-forest {
+  background: linear-gradient(140deg, #12351f 0%, #1d5c36 55%, #16494a 100%);
+}
+
+/* 自定义壁纸覆盖层：保证文字在任意壁纸下可读 */
+.wp-custom { background: var(--bg-app); }
+
+/* ---------- 登录/注册背景（跟随主题） ---------- */
+[data-theme="light"] .login-bg {
+  background: linear-gradient(140deg, #eef2fb 0%, #e2e9f6 50%, #eef3ff 100%);
+}
+[data-theme="dark"] .login-bg {
+  background: linear-gradient(140deg, #0d1119 0%, #101a2e 50%, #0b1a33 100%);
+}
